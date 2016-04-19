@@ -1,0 +1,22 @@
+---
+# Basic ansible for PHP web development
+
+- hosts: all
+  sudo: true
+
+  vars_files:
+    - vars/apache.yml
+    - vars/main.yml
+
+  roles:
+    - repo
+    - apache
+    - firewall
+    - git
+    - ruby
+
+    - php
+    - pecl
+    - composer
+    - memcache
+    - xhprof

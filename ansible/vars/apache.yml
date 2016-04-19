@@ -1,0 +1,9 @@
+---
+# apache_create_vhosts: true
+apache_vhosts:
+
+  - servername: "contacts.dev"
+    documentroot: "/var/www/html/Projects/symfony/web"
+
+  - servername: "markup.contacts.dev"
+    documentroot: "/var/www/html/Projects/contacts"
