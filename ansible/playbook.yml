@@ -1,22 +1,23 @@
 ---
-# Basic ansible for PHP web development
-
 - hosts: all
-  sudo: true
+  become: yes
 
   vars_files:
-    - vars/apache.yml
-    - vars/main.yml
+    - vars/firewall.yml
+    - vars/nginx.params.yml
+    - vars/nginx.yml
+    - vars/php.yml
+    - vars/mysql.yml
 
   roles:
-    - repo
-    - apache
-    - firewall
-    - git
-    - ruby
-
-    - php
-    - pecl
-    - composer
-    - memcache
-    - xhprof
+    - AerisCloud.repos
+    - custom
+    - geerlingguy.firewall
+    - geerlingguy.nginx
+    - geerlingguy.git
+    - geerlingguy.ruby
+    - geerlingguy.php
+    - geerlingguy.php-pecl
+    - geerlingguy.composer
+    - geerlingguy.mysql
+    - geerlingguy.redis

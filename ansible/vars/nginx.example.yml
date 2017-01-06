@@ -1,0 +1,134 @@
+---
+# This file is an example only. This show how to manage your nginx vhosts
+# you can put your actual configuration at the nginx.yml file
+
+nginx_vhosts:
+  # Host for a simple PHP site
+  - listen: "80"
+    server_name: "php.local"
+    root: "/var/www/html/php"
+    index: "index.php"
+    extra_parameters: |
+          location ~ \.php$ {
+              fastcgi_split_path_info ^(.+\.php)(/.+)$;
+              fastcgi_pass 127.0.0.1:9000;
+              fastcgi_index index.php;
+              fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+              include fastcgi_params;
+          }
+
+  # You can also use the preconfigured extra parameters (see nginx.params.yml)
+  # So you can define your host like these instead for a leaner nginx config
+  
+  listen: "80"
+      server_name: "symfony.local"
+      root: "/var/www/html/symfony/web"
+      index: "index.php app.php app_dev.php"
+      extra_parameters: "{{ nginx_params_symfony }}"
+
+  # Host for a Symfony 3.2 site
+  - listen: "80"
+    server_name: "symfony.local"
+    root: "/var/www/html/symfony/web"
+    index: "index.php app.php app_dev.php"
+    extra_parameters: |
+          location / {
+              try_files $uri /app.php$is_args$args;
+          }
+
+          location ~ ^/(app_dev|config)\.php(/|$) {
+              fastcgi_pass 127.0.0.1:9000;
+              fastcgi_split_path_info ^(.+\.php)(/.+)$;
+
+              fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+              fastcgi_param DOCUMENT_ROOT $realpath_root;
+              include fastcgi_params;
+          }
+
+          location ~ ^/app\.php(/|$) {
+              fastcgi_pass 127.0.0.1:9000;
+              fastcgi_split_path_info ^(.+\.php)(/.*)$;
+              include fastcgi_params;
+              fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+              fastcgi_param DOCUMENT_ROOT $realpath_root;
+              internal;
+          }
+
+          location ~ \.php$ {
+            return 404;
+          }
+
+  # Host for a Drupal 7 or 8
+  - listen: "80"
+    server_name: "drupal.local"
+    root: "/var/www/html/drupal"
+    index: "index.php"
+    extra_parameters: |
+          location = /favicon.ico {
+              log_not_found off;
+              access_log off;
+          }
+
+          location = /robots.txt {
+              allow all;
+              log_not_found off;
+              access_log off;
+          }
+
+          location ~* \.(txt|log)$ {
+              allow 192.168.0.0/16;
+              deny all;
+          }
+
+          location ~ \..*/.*\.php$ {
+              return 403;
+          }
+
+          location ~ ^/sites/.*/private/ {
+              return 403;
+          }
+
+          location ~* ^/.well-known/ {
+              allow all;
+          }
+
+          location ~ (^|/)\. {
+              return 403;
+          }
+
+          location / {
+              try_files $uri /index.php?$query_string;
+          }
+
+          location @rewrite {
+              rewrite ^/(.*)$ /index.php?q=$1;
+          }
+
+          location ~ /vendor/.*\.php$ {
+              deny all;
+              return 404;
+          }
+
+          location ~ '\.php$|^/update.php' {
+              fastcgi_split_path_info ^(.+?\.php)(|/.*)$;
+              include fastcgi_params;
+              fastcgi_param HTTP_PROXY "";
+              fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+              fastcgi_param PATH_INFO $fastcgi_path_info;
+              fastcgi_param QUERY_STRING $query_string;
+              fastcgi_intercept_errors on;
+              fastcgi_pass 127.0.0.1:9000;
+          }
+
+          location ~ ^/sites/.*/files/styles/ {
+              try_files $uri @rewrite;
+          }
+
+          location ~ ^(/[a-z\-]+)?/system/files/ {
+              try_files $uri /index.php?$query_string;
+          }
+
+          location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+              expires max;
+              log_not_found off;
+          }

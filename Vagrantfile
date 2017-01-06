@@ -1,32 +1,66 @@
-# This guide is optimized for Vagrant 1.7 and above.
-# Although versions 1.6.x should behave very similarly, it is recommended
-# to upgrade instead of disabling the requirement below.
 Vagrant.require_version ">= 1.7.0"
-	Vagrant.configure(2) do |config|
 
-		# set virtual box name
-		config.vm.provider :virtualbox do |v|
-			v.name = "ansible"
-		end
+# load the commons configuration
+require 'yaml'
+commons = YAML.load_file('ansible/vars/common.yml')
 
-		# use ubuntu 14.04 LTS
-		config.vm.box = "ubuntu/trusty64"
+# Check to determine whether we're on a windows or linux/os-x host,
+# later on we use this to launch ansible in the supported way
+def which(cmd)
+    exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
+    ENV['PATH'].split(File::PATH_SEPARATOR).each do |path|
+        exts.each { |ext|
+            exe = File.join(path, "#{cmd}#{ext}")
+            return exe if File.executable? exe
+        }
+    end
+    return nil
+end
 
-		# since we are using a locally updated box disable update checking
-		config.vm.box_check_update = false
+Vagrant.configure("2") do |config|
+    # set virtual box name
+    config.vm.provider :virtualbox do |v|
+        v.name = commons['box_name']
+    end
 
-		# Disable the new default behavior introduced in Vagrant 1.7, to
-		# ensure that all Vagrant machines will use the same SSH key pair.
-		# See https://github.com/mitchellh/vagrant/issues/5005
-		# config.ssh.insert_key = false
-		config.ssh.forward_agent = true
+    # use special Centos 7 version
+    config.vm.box = "puphpet/centos7-x64"
+    # config.vm.box = "centos/7"
+    # config.vm.box = "geerlingguy/centos7"
+    config.vm.network :private_network, ip: commons['box_ip']
 
-		# mount folders
-		config.vm.network "private_network", ip: "192.168.100.100"
-		config.vm.synced_folder "/Users/Alex/Github", "/var/www/html"
+    # mount folders
+    config.vm.synced_folder "./", "/vagrant", type: "nfs"
+    config.vm.synced_folder commons['mount_src'], commons['mount_dest'], type: "nfs"
 
-		config.vm.provision "ansible" do |ansible|
-		ansible.verbose = "v"
-		ansible.playbook = "ansible/playbook.yml"
-	end
+    # Port forwarding
+    # enable port forwarding as necessary, requires vagrant reload
+    # config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
+    # config.vm.network "forwarded_port", guest: 22, host: 2200, auto_correct: true
+    # config.vm.network "forwarded_port", guest: 3306, host: 3300, auto_correct: true
+
+    # Disable the new default behavior introduced in Vagrant 1.7, to
+    # ensure that all Vagrant machines will use the same SSH key pair.
+    # config.ssh.insert_key = false
+    config.ssh.forward_agent = true
+
+    if which('ansible-playbook')
+        config.vm.provision "ansible" do |ansible|
+            ansible.verbose = "v"
+            ansible.playbook = "ansible/playbook.yml"
+            ansible.galaxy_role_file = "ansible/requirements.yml"
+            ansible.sudo = true
+        end
+    else
+        # Using Ansible Local instead
+        config.vm.provision "ansible_local" do |ansible|
+            ansible.verbose = "v"
+            ansible.playbook = "ansible/playbook.yml"
+            # ansible.galaxy_role_file = "ansible/requirements.yml"
+            ansible.sudo = true
+        end
+
+        # Shell provisioning is faster than ansible local
+        # config.vm.provision :shell, path: "ansible/windows.sh", args: [commons['box_name']]
+    end
 end

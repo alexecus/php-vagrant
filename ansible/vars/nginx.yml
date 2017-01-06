@@ -1,0 +1,19 @@
+---
+nginx_vhosts:
+  - listen: "80"
+    server_name: "dafaware.local"
+    root: "/var/www/html/feature-dafabet-ware/web"
+    index: "index.php app.php app_dev.php"
+    extra_parameters: "{{ nginx_params_symfony_dev }}"
+
+  - listen: "80"
+    server_name: "drupalware.local"
+    root: "/var/www/html/feature-drupal/web"
+    index: "index.php"
+    extra_parameters: "{{ nginx_params_drupal }}"
+
+  - listen: "80"
+    server_name: "cashier.local"
+    root: "/var/www/html/Cashier/release-cashier-revamp/base"
+    index: "index.php"
+    extra_parameters: "{{ nginx_params_drupal }}"

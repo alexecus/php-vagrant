@@ -1,0 +1,12 @@
+---
+- src: AerisCloud.repos
+- src: geerlingguy.nginx
+- src: geerlingguy.firewall
+- src: geerlingguy.git
+- src: geerlingguy.ruby
+- src: geerlingguy.php
+- src: geerlingguy.php-pecl
+- src: geerlingguy.composer
+- src: geerlingguy.mysql
+- src: geerlingguy.redis
+- src: geerlingguy.firewall

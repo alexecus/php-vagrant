@@ -1,0 +1,25 @@
+---
+php_webserver_daemon: "nginx"
+php_fpm_pool_user: "nginx"
+php_fpm_pool_group: "nginx"
+php_enable_php_fpm: true
+php_packages:
+  - php70u-cli
+  - php70u-common
+  - php70u-devel
+  - php70u-gd
+  - php70u-mbstring
+  - php70u-soap
+  - php70u-mcrypt
+  - php70u-pdo
+  - php70u-pecl-apcu 
+  - php70u-xml
+  - php70u-mysqlnd
+  - ImageMagick
+  - php70u-xmlrpc
+  - php70u-process
+  - php70u-intl
+  - php70u-opcache
+  - php70u-json
+  - php70u-fpm
+  - php70u-fpm-nginx

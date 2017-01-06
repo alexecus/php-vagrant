@@ -1,0 +1,9 @@
+---
+dependencies:
+  - role: AerisCloud.repos
+    repositories:
+      centos7:
+        - name: epel
+          enabled: true
+        - name: ius
+          enabled: true
