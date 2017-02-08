@@ -24,8 +24,8 @@ Vagrant.configure("2") do |config|
     end
 
     # use special Centos 7 version
-    # config.vm.box = "puphpet/centos7-x64"
-    config.vm.box = "centos/7"
+    config.vm.box = "puphpet/centos7-x64"
+    # config.vm.box = "centos/7"
     # config.vm.box = "geerlingguy/centos7"
     config.vm.network :private_network, ip: commons['box_ip']
 
