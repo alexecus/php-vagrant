@@ -1,0 +1,26 @@
+---
+# Box name setup
+# You can specify here the box name and ip address. Modify this if you want to
+# manage the host ip
+name: "local_centos_env"
+ip: 192.168.56.101
+
+# NFS mounting options
+# If you want to use NFS, which is highly recommended, just set the flag here to
+# true. Specify the src and dest mount points
+nfs: true
+src: Users/Alex/Github/
+dest: var/www/html
+
+# Samba Sharing
+# Enable samba sharing, recommended for Windows hosts or for those who require
+# intensive file operations and needs a way to easily access those files on
+# the host machine
+samba: true
+share: var/www/html
+
+# Port forwarding
+# Specify here the ports you want to forward
+# forwards:
+#   - guest: 80, host: 8080
+#   - guest: 22, host: 2200

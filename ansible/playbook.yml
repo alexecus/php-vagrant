@@ -11,7 +11,6 @@
 
   roles:
     - AerisCloud.repos
-    - custom
     - geerlingguy.firewall
     - geerlingguy.nginx
     - geerlingguy.git
@@ -21,3 +20,4 @@
     - geerlingguy.composer
     - geerlingguy.mysql
     - geerlingguy.redis
+    - custom

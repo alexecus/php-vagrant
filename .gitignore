@@ -1,0 +1,4 @@
+.vagrant
+playbook.retry
+ansible/roles/*
+!ansible/roles/custom
