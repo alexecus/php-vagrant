@@ -9,15 +9,15 @@ ip: 192.168.56.101
 # If you want to use NFS, which is highly recommended, just set the flag here to
 # true. Specify the src and dest mount points
 nfs: true
-src: Users/Alex/Github/
-dest: var/www/html
+src: /Users/Alex/Github/
+dest: /var/www/html
 
 # Samba Sharing
 # Enable samba sharing, recommended for Windows hosts or for those who require
 # intensive file operations and needs a way to easily access those files on
 # the host machine
-samba: true
-share: var/www/html
+# samba: true
+# share: /var/www/html
 
 # Port forwarding
 # Specify here the ports you want to forward

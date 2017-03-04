@@ -10,6 +10,7 @@
     - vars/mysql.yml
 
   roles:
+    - custom
     - AerisCloud.repos
     - geerlingguy.firewall
     - geerlingguy.nginx
@@ -20,4 +21,3 @@
     - geerlingguy.composer
     - geerlingguy.mysql
     - geerlingguy.redis
-    - custom

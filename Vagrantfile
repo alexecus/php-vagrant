@@ -1,8 +1,7 @@
-Vagrant.require_version ">= 1.9.0"
+Vagrant.require_version ">= 1.9.2"
 
 # load the commons configuration
 require 'yaml'
-# commons = YAML.load_file('ansible/vars/common.yml')
 commons = YAML.load_file('config.yml')
 
 # Check to determine whether we're on a windows or linux/os-x host,
@@ -25,9 +24,8 @@ Vagrant.configure("2") do |config|
     end
 
     # use special Centos 7 version
-    config.vm.box = "puphpet/centos7-x64"
-    # config.vm.box = "centos/7"
-    # config.vm.box = "geerlingguy/centos7"
+    config.vm.box = "centos/7"
+
     config.vm.network :private_network, ip: commons['ip']
 
     # mount folders
@@ -55,5 +53,5 @@ Vagrant.configure("2") do |config|
     end
 
     # We run the shell provisioner to fix the network issue
-    config.vm.provision :shell, path: "ansible/shell.sh", run: "always"
+    # config.vm.provision :shell, path: "ansible/shell.sh", run: "always"
 end
