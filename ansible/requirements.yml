@@ -10,3 +10,4 @@
 - src: geerlingguy.mysql
 - src: geerlingguy.redis
 - src: geerlingguy.firewall
+- src: geerlingguy.nodejs

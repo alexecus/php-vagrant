@@ -8,9 +8,10 @@
     - vars/nginx.yml
     - vars/php.yml
     - vars/mysql.yml
+    - vars/node.yml
 
   roles:
-    - custom
+    - init
     - AerisCloud.repos
     - geerlingguy.firewall
     - geerlingguy.nginx
@@ -21,3 +22,4 @@
     - geerlingguy.composer
     - geerlingguy.mysql
     - geerlingguy.redis
+    - geerlingguy.nodejs

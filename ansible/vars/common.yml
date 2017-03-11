@@ -1,7 +1,0 @@
----
-box_name: "local_centos_env"
-box_ip: 192.168.56.101
-
-# NFS mounting options
-mount_src: "C:/Web/Projects"
-mount_dest: "/var/www/html"

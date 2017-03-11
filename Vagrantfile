@@ -40,6 +40,8 @@ Vagrant.configure("2") do |config|
     # config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
     # config.vm.network "forwarded_port", guest: 22, host: 2200, auto_correct: true
     # config.vm.network "forwarded_port", guest: 3306, host: 3300, auto_correct: true
+
+    # SSH settings
     config.ssh.forward_agent = true
 
     # Ansible provisioning
