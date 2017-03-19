@@ -33,6 +33,8 @@ Vagrant.configure("2") do |config|
 
     if commons['nfs']
         config.vm.synced_folder commons['src'], commons['dest'], type: "nfs"
+    else
+        config.vm.synced_folder commons['src'], commons['dest']
     end
 
     # Port forwarding

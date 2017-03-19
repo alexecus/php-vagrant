@@ -1,7 +1,7 @@
 ---
 # Box name setup
 # You can specify here the box name and ip address. Modify this if you want to
-# manage the host ip
+# manage the host IP
 name: "local_centos_env"
 ip: 192.168.56.101
 
@@ -9,9 +9,9 @@ ip: 192.168.56.101
 # Specify here the custom key you want to use
 key: ~/.ssh/id_rsa
 
-# NFS mounting options
-# If you want to use NFS, which is highly recommended, just set the flag here to
-# true. Specify the src and dest mount points
+# Mounting options
+# Specify the src and dest mount points. If you want to use NFS, which is highly
+# recommended, just set the flag here to true
 nfs: true
 src: ~/Github/
 dest: /var/www/html
