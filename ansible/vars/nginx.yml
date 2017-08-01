@@ -1,7 +1,0 @@
----
-nginx_vhosts:
-  - listen: "80"
-    server_name: "oms.local"
-    root: "/var/www/html/Projects/OMS/web"
-    index: "index.php app.php app_dev.php"
-    extra_parameters: "{{ nginx_params_symfony_dev }}"

@@ -13,7 +13,7 @@ key: ~/.ssh/id_rsa
 # Specify the src and dest mount points. If you want to use NFS, which is highly
 # recommended, just set the flag here to true
 nfs: true
-src: ~/Github/
+src: ~/Projects
 dest: /var/www/html
 
 # Samba Sharing

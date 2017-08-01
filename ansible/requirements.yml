@@ -4,6 +4,7 @@
 - src: geerlingguy.firewall
 - src: geerlingguy.git
 - src: geerlingguy.ruby
+- src: geerlingguy.drupal-console
 - src: geerlingguy.php
 - src: geerlingguy.php-pecl
 - src: geerlingguy.composer
