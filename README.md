@@ -1,6 +1,6 @@
-PHP VM
+PHP Vagrant
 -------
-PHP VM is a fast and stable local web environment built using Vagrant and Ansible.
+PHP Vagrant is a fast and stable local web environment built using Vagrant and Ansible.
 
 Start working on your PHP projects without the hassle of setting up your development enviroment.
 
@@ -17,9 +17,9 @@ Start working on your PHP projects without the hassle of setting up your develop
  - It's fast
  - Easy to configure
 
-**What's inside:**
+**What's inside**
 
- - Official Centos 7 vagrant box
+ - Official Centos 7 Box
  - PHP 7.1
  - Composer
  - Nginx
