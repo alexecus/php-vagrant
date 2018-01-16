@@ -2,18 +2,12 @@
 nginx_vhosts:
   - listen: "80"
     server_name: "drupal.local"
-    root: "/var/www/html/Webpress/Blog/web"
+    root: "/var/www/html/Drupal"
     index: "index.php"
     extra_parameters: "{{ nginx_params_drupal }}"
 
   - listen: "80"
-    server_name: "jennevie.local"
-    root: "/var/www/html/Webpress/Jennevie"
-    index: "index.php"
-    extra_parameters: "{{ nginx_params_php }}"
-
-  - listen: "80"
-    server_name: "alexecus.local"
-    root: "/var/www/html/Webpress/Alexecus/web"
-    index: "index.php index.html"
-    extra_parameters: "{{ nginx_params_php }}"
+    server_name: "symfony.local"
+    root: "/var/www/html/Symfony"
+    index: "app.php"
+    extra_parameters: "{{ nginx_params_symfony }}"

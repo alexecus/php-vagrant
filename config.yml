@@ -3,7 +3,7 @@
 # You can specify here the box name and ip address. Modify this if you want to
 # manage the host IP
 name: "local_centos_env"
-ip: 192.168.56.101
+ip: 192.168.56.1
 
 # SSH settings
 # Specify here the custom key you want to use
