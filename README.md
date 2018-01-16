@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/logo.png" width="215"></p>
+<p align="center"><img src="assets/banner.png" width="450"></p>
 
 **PHP Vagrant** is a fast and stable local web environment built using Vagrant and Ansible.
 
