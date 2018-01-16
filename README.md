@@ -1,9 +1,5 @@
+<p align="center"><img src="assets/logo.png" width="200"></p>
 
-<p align="center">
-  <img height="200px" src="assets/logo.png">
-</p>
-
-PHP Vagrant
 -------
 PHP Vagrant is a fast and stable local web environment built using Vagrant and Ansible.
 
