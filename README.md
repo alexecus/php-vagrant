@@ -1,6 +1,6 @@
-PHP Vagrant
--------
-PHP Vagrant is a fast and stable local web environment built using Vagrant and Ansible.
+<p align="center"><img src="assets/logo.png" width="215"></p>
+
+**PHP Vagrant** is a fast and stable local web environment built using Vagrant and Ansible.
 
 Start working on your PHP projects without the hassle of setting up your development enviroment.
 
