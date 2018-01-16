@@ -7,20 +7,10 @@
     - vars/firewall.yml
     - vars/nginx.params.yml
     - vars/php.yml
-    - vars/mysql.yml
-    - vars/node.yml
 
   roles:
     - AerisCloud.repos
     - init
     - geerlingguy.firewall
     - geerlingguy.nginx
-    - geerlingguy.git
-    - geerlingguy.ruby
-    - geerlingguy.drupal-console
     - geerlingguy.php
-    - geerlingguy.php-pecl
-    - geerlingguy.composer
-    - geerlingguy.mysql
-    - geerlingguy.redis
-    - geerlingguy.nodejs

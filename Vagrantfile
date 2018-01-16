@@ -17,6 +17,20 @@ def which(cmd)
     return nil
 end
 
+# Get the hostnames of the available servers
+def hosts()
+    host = []
+    sites = YAML.load_file('sites.yml')
+
+    if sites && sites['nginx_vhosts']
+        sites['nginx_vhosts'].each do |site|
+            host.push(site['server_name'])
+        end
+    end
+
+    return host
+end
+
 Vagrant.configure("2") do |config|
     # set virtual box name
     config.vm.provider :virtualbox do |v|
@@ -37,6 +51,9 @@ Vagrant.configure("2") do |config|
         config.vm.synced_folder commons['src'], commons['dest']
     end
 
+    # Manage host files
+    config.hostsupdater.aliases = hosts()
+
     # Port forwarding
     # enable port forwarding as necessary, requires vagrant reload
     # config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
@@ -56,6 +73,17 @@ Vagrant.configure("2") do |config|
         ansible.sudo = true
     end
 
-    # We run the shell provisioner to fix the network issue
-    # config.vm.provision :shell, path: "ansible/shell.sh", run: "always"
+    # Custom provisioning to only provision web related roles
+    config.vm.provision "web", run: "never", type: ansible do |ansible|
+        ansible.verbose = "v"
+        ansible.playbook = "ansible/playbook.web.yml"
+        ansible.sudo = true
+    end
+
+    # Custom provisioning to only provision nginx
+    config.vm.provision "nginx", run: "never", type: ansible do |ansible|
+        ansible.verbose = "v"
+        ansible.playbook = "ansible/playbook.nginx.yml"
+        ansible.sudo = true
+    end
 end

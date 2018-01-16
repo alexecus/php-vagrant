@@ -1,0 +1,31 @@
+class WebCommand < Vagrant.plugin(2, :command)
+  def self.synopsis
+    "Provisions only web related roles"
+  end
+
+  def execute
+    exec("vagrant provision --provision-with web")
+  end
+end
+
+class NginxCommand < Vagrant.plugin(2, :command)
+  def self.synopsis
+    "Provisions only nginx"
+  end
+
+  def execute
+    exec("vagrant provision --provision-with nginx")
+  end
+end
+
+class MyPlugin < Vagrant.plugin(2)
+  name "Custom command plugin"
+
+  command "web" do
+    WebCommand
+  end
+
+  command "nginx" do
+    NginxCommand
+  end
+end

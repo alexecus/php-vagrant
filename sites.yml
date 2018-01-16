@@ -1,0 +1,13 @@
+---
+nginx_vhosts:
+  - listen: "80"
+    server_name: "drupal.local"
+    root: "/var/www/html/Drupal"
+    index: "index.php"
+    extra_parameters: "{{ nginx_params_drupal }}"
+
+  - listen: "80"
+    server_name: "symfony.local"
+    root: "/var/www/html/Symfony"
+    index: "app.php"
+    extra_parameters: "{{ nginx_params_symfony }}"
